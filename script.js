@@ -1,69 +1,70 @@
-// Assignment Code
-var numbers = ["0","1","2","3","4","5","6","7","8","9"];
-console.log(numbers);
-var lowLetters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-console.log(lowLetters);
-var upperLetters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-var specCharacters = ["!","@","#","$","%","^","&","*","(",")"];
-var possibleCharacters = numbers.concat(lowLetters,upperLetters,specCharacters);
-console.log(possibleCharacters);
-
-function generatePassword(){
-
-  // var length = parseInt( prompt('how many characters would you like your password to contain?)10); 
-
-/* if (number.isNAN(length)) { 
-  alert('password length must be given as a number');
-  return null;
-}
-
-if (password < 8) {
-  alert("Your password must have between 8 and 128 characters.")
-  return null;
-}
-
-
-var isSpecialCha = confirm(" something goes here") 
-
-*/
-
-var password = window.prompt("How many characters would you like your password to have (8-128)? ")
-console.log(password);
-if (password < 8) {
-  alert("Your password must have between 8 and 128 characters.")
-  return null;
-}
-if (password > 128) {
-  alert("Your password must have between 8 and 128 characters.")
-  return null;
-}
-
-
-
-}
-confirm("Click OK to confirm including lowercase characters")
-confirm("Click OK to confirm including uppercase characters")
-confirm("Click OK to confirm including numbers")
-confirm("Click OK to confirm including special characters")
-
 var generateBtn = document.querySelector("#generate");
 
-var random = Math.floor(Math.random()*possibleCharacters.length)
-console.log(possibleCharacters[random])
-for (let i = 0; i < random; i++){
-  console.log(random)
+var upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var randomUpper = upperLetters[Math.floor(Math.random() * upperLetters.length)];
+
+var lowerLetters = "abcdefghijklmnopqrstuvwxyz";
+var randomLower = lowerLetters[Math.floor(Math.random() * lowerLetters.length)];
+
+var num = "1234567890";
+var randomNum = num[Math.floor(Math.random() * num.length)];
+
+var symbols ="!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+var randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+
+function randomCharacter() {
+  return character[Math.floor(Math.random() * character.length)];
 }
-// Write password to the #password input
+ 
+
+function generatePassword() {
+  var length = 0;
+  while (length < 8 || length > 128) {
+     length = prompt("How may characters? (8-128)");
+  if (length < 8 || length > 128) {
+    alert("Please enter valid password length!");
+  }}
+  var finalPassword = "";
+  var allPossibleChar = "";
+  var upConfirm = confirm("Do you want any Uppercase letters in your password? ")
+  if (upConfirm === true){
+    finalPassword += randomUpper
+    allPossibleChar = allPossibleChar + upperLetters;
+};
+  var lowConfirm = confirm("Do you want any Lowercase letters in your password?")
+  if (lowConfirm === true){
+    finalPassword += randomLower
+    allPossibleChar = allPossibleChar + lowerLetters;
+  };
+  var numConfirm = confirm("Do you want any numbers in your password?")
+  if (numConfirm === true){
+    finalPassword += randomNum
+    allPossibleChar = allPossibleChar + num;
+  };
+  var symConfirm = confirm("Do you want any special characters in your password?")
+  if (symConfirm === true) {
+    finalPassword += randomSymbol
+    allPossibleChar = allPossibleChar + symbols;
+  };
+  if (allPossibleChar.length == 0){
+    alert("Please chose at least one character type!");
+    return;
+  }
+  else {
+  for (var i = finalPassword.length; i < length; i++){
+    var newLetter = allPossibleChar[Math.floor(Math.random() * allPossibleChar.length)]
+    console.log(newLetter)
+  finalPassword = finalPassword + newLetter;
+  }
+  return finalPassword;
+}}
+
 function writePassword() {
-  var randomPassword = generatePassword();
+  var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = randomPassword;
+  passwordText.value = password;
+
 }
 
-// Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
-
-
